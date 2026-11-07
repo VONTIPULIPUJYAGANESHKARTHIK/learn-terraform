@@ -22,3 +22,8 @@ validation {
     condition = contains(["t3.micro", "t3.small","t3.medium"], var.instance_type)
     error_message = "Instance type should be t3.micro or t3.small"
 }
+
+variable "instance" {
+    type = list
+    default = ["mongodb", "redis", "rabbitmq", "catalouge", "user", "shipping", "payment", "frontend", "dispatch", "cart", "mysql"]
+}
