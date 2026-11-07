@@ -8,6 +8,11 @@ variable  "instance_type" {
   type        = string
   default     = "t3.micro"
   description = "Instance type of EC2"
+
+  validation {
+    condition = contains(["t2.micro", "t3.micro", "t4.micro"], var.instance_type)
+    error_message = "Instance type is not supported"
+  }
 }
 
 variable "ec2_tags" {
