@@ -32,7 +32,7 @@ resource "aws_security_group" "functions" {
   tags = merge {
     var.common_tags
     {
-        Name = "functions-demo"
+        Name = "functions-sg"
         Component = "poc"
     }
   }
