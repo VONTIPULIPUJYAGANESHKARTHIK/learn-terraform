@@ -7,6 +7,7 @@ resource "aws_instance" "functions" {
     var.common_tags
     {
         Name = "functions-demo"
+        Component = "poc"
     }
   }
 
