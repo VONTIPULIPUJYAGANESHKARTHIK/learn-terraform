@@ -1,15 +1,17 @@
-resource "aws_instance" "web" {
+resource "aws_instance" "functions" {
   instance_type = "t3.micro"
   ami = "ami-0055977a6e828a4f4"
-  vpc_security_group_ids = [aws_security_group.web.id]
+  vpc_security_group_ids = [aws_security_group.functions.id]
 
-  tags = {
-    Name = "roboshop-web"
+  tags = merge {
+    var.common_tags
+    {
+        Name = "functions-demo"
+    }
   }
-} 
 
-resource "aws_security_group" "web" {
-  name        = "web"
+resource "aws_security_group" "functions" {
+  name        = "functions"
   description = "Allow TLS inbound traffic and all outbound traffic"
 
   ingress {
