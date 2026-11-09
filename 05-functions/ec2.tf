@@ -29,7 +29,10 @@ resource "aws_security_group" "functions" {
     cidr_blocks      = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name = "roboshop-web"
+  tags = merge {
+    var.common_tags
+    {
+        Name = "functions-demo"
+        Component = "poc"
+    }
   }
-}
