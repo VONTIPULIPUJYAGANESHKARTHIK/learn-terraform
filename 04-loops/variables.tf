@@ -30,7 +30,7 @@ variable "instances" {
 }
 
 variable "zone_id" {
-    default = "Z01595761DU8O4AX48D6A"
+    default = "Z01591623E51DMT4FH925"
 }
 
 variable "domain_name" {
