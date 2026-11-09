@@ -1,42 +1,38 @@
 variable "environment" {
-  default = "dev"
+    default = "dev"
 }
 
 variable "project" {
-  default = "roboshop"
+    default = "roboshop"
 }
 
-variable "ami_id" {
+variable  "ami_id" {
   type        = string
   default     = "ami-0055977a6e828a4f4"
-  description = "AMI ID to be used for the instances"
+  description = "AMI ID of the instance"
 }
 
-variable "instance_type" {
+variable  "instance_type" {
   type        = string
   default     = "t3.micro"
-  description = "Instance type for the instances"
+  description = "Instance type of EC2"
 
   validation {
-    condition     = contains(["t3.micro", "t3.small", "t3.medium"], var.instance_type)
-    error_message = "Instance type should be t3.micro, t3.small, or t3.medium."
+    # Returns true if var.enviroinstance_typenment is one of the items in the list
+    condition     = contains(["t3.micro", "t3.small", "t3.medium", "t3.large"], var.instance_type)
+    error_message = "Instance type must be one of t3.small, t3.micro, t3.medium or t3.large."
   }
 }
 
 variable "instances" {
-  type = list(string)
+    type = list
+    default = ["mongodb", "redis", "mysql", "rabbitmq", "catalogue", "user", "cart", "shipping", "payment", "frontend"]
+}
 
-  default = [
-    "mongodb",
-    "redis",
-    "rabbitmq",
-    "catalogue",
-    "user",
-    "shipping",
-    "payment",
-    "frontend",
-    "dispatch",
-    "cart",
-    "mysql"
-  ]
+variable "zone_id" {
+    default = "Z01595761DU8O4AX48D6A"
+}
+
+variable "domain_name" {
+    default = "gcart.store"
 }
