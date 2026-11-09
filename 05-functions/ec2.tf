@@ -3,13 +3,14 @@ resource "aws_instance" "functions" {
   ami = "ami-0055977a6e828a4f4"
   vpc_security_group_ids = [aws_security_group.functions.id]
 
-  tags = merge {
-    var.common_tags
+  tags = merge (
+    var.common_tags,
     {
-        Name = "functions-demo"
-        Component = "poc"
+      Name = "functions-demo"
+      Component = "poc"
     }
-  }
+  )
+}
 
 resource "aws_security_group" "functions" {
   name        = "functions"
@@ -29,10 +30,11 @@ resource "aws_security_group" "functions" {
     cidr_blocks      = ["0.0.0.0/0"]
   }
 
-  tags = merge {
-    var.common_tags
+  tags = merge (
+    var.common_tags,
     {
-        Name = "functions-sg"
-        Component = "poc"
+      Name = "functions-sg"
+      Component = "poc"
     }
-  }
+  )
+}
