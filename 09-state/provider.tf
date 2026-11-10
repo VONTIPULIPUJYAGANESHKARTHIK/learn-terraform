@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket       = "remote-tf-state-gcart "
+    bucket       = "remote-tf-state-gcart"
     key          = "remote-state-demo.tfstate"
     region       = "us-east-1"
     encrypt      = true
