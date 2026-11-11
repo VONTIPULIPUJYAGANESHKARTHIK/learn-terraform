@@ -31,6 +31,13 @@ resource "aws_instance" "provisioners" {
     ]
   }
 
+  provisioner "remote-exec" {
+    when    = destroy
+    inline = [
+      "sudo systemctl stop nginx"
+    ]
+  }
+
   tags = {
     Name = "roboshop-provisioners"
   }
