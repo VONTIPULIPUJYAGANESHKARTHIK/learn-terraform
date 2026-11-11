@@ -13,7 +13,7 @@ resource "aws_instance" "provisioners" {
 
   provisioner "local-exec" {
     when    = destroy
-    command = "echo 'Instance is going to be destyoyed' "
+    command = "echo 'Instance is going to be destyoyed' " # echo > inventory.ini
   }
 
   connection {
@@ -23,11 +23,23 @@ resource "aws_instance" "provisioners" {
     host        = self.public_ip
   }
 
-  provisioner "remote-exec" {
+  /* provisioner "remote-exec" {
     inline = [
       "sudo dnf install nginx -y",
       "sudo systemctl start nginx",
       "sudo systemctl enable nginx"
+    ]
+  } */
+
+  provisioner "file" {
+    source      = "bootstrap.sh"       # Local file path
+    destination = "/tmp/bootstrap.sh"       # Remote target path
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/bootstrap.sh",
+      "sudo sh /tmp/bootstrap.sh"
     ]
   }
 
