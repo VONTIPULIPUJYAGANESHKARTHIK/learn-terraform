@@ -3,14 +3,14 @@ variable  "instance_type" {
   type        = string
 }
 
-variavle "environment" {
-  type = string
+variable "environment" {
+    type = string
 }
 
 variable "ec2_tags" {
     type = map
     default = {
-        Name = "roboshop-workspaces-demo"
+        Name = "roboshop-tfvars-demo"
         Environment = "dev"
         Terraform = "true"
         Project = "roboshop"
