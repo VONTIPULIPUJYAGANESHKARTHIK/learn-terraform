@@ -3,6 +3,10 @@ variable  "instance_type" {
   type        = string
 }
 
+variavle "environment" {
+  type = string
+}
+
 variable "ec2_tags" {
     type = map
     default = {

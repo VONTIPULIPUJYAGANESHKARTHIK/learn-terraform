@@ -1,13 +1,13 @@
-resource "aws_instance" "workspaces_demo" {
-  instance_type = lookup(var.instance_type, terraform.workspace)
+resource "aws_instance" "tfvars_demo" {
+  instance_type = var.instance_type
   ami = data.aws_ami.joindevops.id
-  vpc_security_group_ids = [aws_security_group.workspaces_demo.id]
+  vpc_security_group_ids = [aws_security_group.tfvars_demo.id]
 
   tags = var.ec2_tags
 }
 
-resource "aws_security_group" "workspaces_demo" {
-  name        = "roboshop-workspaces-demo-${terraform.workspace}"
+resource "aws_security_group" "tfvars_demo" {
+  name        = "roboshop-tfvars-demo-${var.environment}"
   description = "Allow TLS inbound traffic and all outbound traffic"
 
   ingress {
@@ -25,7 +25,7 @@ resource "aws_security_group" "workspaces_demo" {
   }
 
   tags = {
-    Name = "roboshop-workspaces-demo-${terraform.workspace}"
+    Name = "roboshop-tfvars-demo-${var.environment}"
   }
 
   lifecycle {
